@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<extension key="uk.artfulrobot.loglop" type="module">
+  <file>loglop</file>
+  <name>Log Lop</name>
+  <description>Provides scheduled task to prevent logs growing indefinitely.</description>
+  <license>GPL-2.0+</license>
+  <maintainer>
+    <author>Rich Lott</author>
+    <email>forums@artfulrobot.uk</email>
+  </maintainer>
+  <urls>
+    <url desc="Main Extension Page">http://artfulrobot.uk</url>
+    <url desc="Documentation">http://artfulrobot.uk</url>
+    <url desc="Support">http://artfulrobot.uk</url>
+    <url desc="Licensing">http://www.gnu.org/licenses/gpl-2.0.html</url>
+  </urls>
+  <releaseDate>2016-03-10</releaseDate>
+  <version>1.0</version>
+  <develStage>alpha</develStage>
+  <compatibility>
+    <ver>4.6</ver>
+  </compatibility>
+  <comments>This is a new module. If it deletes all your data don't blame me.</comments>
+  <civix>
+    <namespace>CRM/Loglop</namespace>
+  </civix>
+</extension>
