@@ -2,15 +2,15 @@
 <extension key="uk.artfulrobot.loglop" type="module">
   <file>loglop</file>
   <name>Log Lop</name>
-  <description>Provides scheduled task to prevent logs growing indefinitely.</description>
+  <description>Provides scheduled task to prevent job logs growing indefinitely by lopping off logs older than a configured length of time, e.g. 1 month, 1 year. After installing go to /civicrm/admin/loglop to enable.</description>
   <license>GPL-2.0+</license>
   <maintainer>
     <author>Rich Lott</author>
     <email>forums@artfulrobot.uk</email>
   </maintainer>
   <urls>
-    <url desc="Main Extension Page">http://artfulrobot.uk</url>
-    <url desc="Documentation">http://artfulrobot.uk</url>
+    <url desc="Main Extension Page">https://github.com/artfulrobot/uk.artfulrobot.loglop</url>
+    <url desc="Documentation">https://github.com/artfulrobot/uk.artfulrobot.loglop</url>
     <url desc="Support">http://artfulrobot.uk</url>
     <url desc="Licensing">http://www.gnu.org/licenses/gpl-2.0.html</url>
   </urls>
@@ -20,7 +20,7 @@
   <compatibility>
     <ver>4.6</ver>
   </compatibility>
-  <comments>This is a new module. If it deletes all your data don't blame me.</comments>
+  <comments>This is a new module. It looks safe to me, but I'm not promising it won't delete all your logs. Have a look a the code and use it if you like the look of it. PRs welcome.</comments>
   <civix>
     <namespace>CRM/Loglop</namespace>
   </civix>

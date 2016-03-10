@@ -1,5 +1,4 @@
 <?php
-
 /**
  * JobLog.Loglop API specification (optional)
  * This is used for documentation and validation.
@@ -25,8 +24,24 @@ function civicrm_api3_job_log_Loglop($params) {
   //if (array_key_exists('magicword', $params) && $params['magicword'] == 'sesame') {
   // civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL, &$dao = NULL, $extraReturnValues = array()) {
 
+  // Load setting.
+  $result = civicrm_api3('Setting', 'get', array(
+    'sequential' => 1,
+    'return' => "loglop_job_log_age",
+  ));
+  $loglop_job_log_age = isset($result['values'][0]['loglop_job_log_age']) ? $result['values'][0]['loglop_job_log_age'] : null;
+  // Check it's something valid, otherwise the strtotime might mess up and give
+  // today's date which would delete all logs :-/
+  if (!in_array($loglop_job_log_age, ['', '2 years', '1 year', '6 months', '1 month', '1 day'])) {
+    $loglop_job_log_age = '';
+  }
+  if (!$loglop_job_log_age) {
+    // disabled.
+    return civicrm_api3_create_success();
+  }
+
   // one year ago @todo allow changing this.
-  $ages_ago = date('Y-m-d', strtotime("today - 2 year"));
+  $ages_ago = date('Y-m-d', strtotime("today - $loglop_job_log_age"));
 
   $result = (int) civicrm_api3('JobLog', 'getcount', array(
     'run_time' => array('<' => $ages_ago),

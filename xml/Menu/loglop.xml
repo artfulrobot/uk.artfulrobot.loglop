@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/admin/loglop</path>
+    <page_callback>CRM_Loglop_Form_LogLopSettings</page_callback>
+    <title>LogLopSettings</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
