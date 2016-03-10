@@ -9,7 +9,7 @@
  * @see http://wiki.civicrm.org/confluence/display/CRMDOC/API+Architecture+Standards
  */
 function _civicrm_api3_job_log_Loglop_spec(&$spec) {
-  $spec['magicword']['api.required'] = 1;
+  //$spec['magicword']['api.required'] = 1;
 }
 
 /**
@@ -22,19 +22,29 @@ function _civicrm_api3_job_log_Loglop_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_job_log_Loglop($params) {
-  if (array_key_exists('magicword', $params) && $params['magicword'] == 'sesame') {
-    $returnValues = array( // OK, return several data rows
-      12 => array('id' => 12, 'name' => 'Twelve'),
-      34 => array('id' => 34, 'name' => 'Thirty four'),
-      56 => array('id' => 56, 'name' => 'Fifty six'),
-    );
-    // ALTERNATIVE: $returnValues = array(); // OK, success
-    // ALTERNATIVE: $returnValues = array("Some value"); // OK, return a single value
+  //if (array_key_exists('magicword', $params) && $params['magicword'] == 'sesame') {
+  // civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL, &$dao = NULL, $extraReturnValues = array()) {
 
-    // Spec: civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL)
-    return civicrm_api3_create_success($returnValues, $params, 'NewEntity', 'NewAction');
-  } else {
-    throw new API_Exception(/*errorMessage*/ 'Everyone knows that the magicword is "sesame"', /*errorCode*/ 1234);
+  // one year ago @todo allow changing this.
+  $ages_ago = date('Y-m-d', strtotime("today - 2 year"));
+
+  $result = (int) civicrm_api3('JobLog', 'getcount', array(
+    'run_time' => array('<' => $ages_ago),
+  ));
+  if ($result == 0) {
+    // Nothing to do.
+    return civicrm_api3_create_success();
   }
+  // We need to do a bulk delete. CiviCRM's API does not let us do this. Too
+  // dangerous. Quite sensible. Let's go for it!
+  $sql = "DELETE FROM civicrm_job_log WHERE run_time < %1";
+  $params = array(
+    1 => array($ages_ago, 'String'),
+  );
+  $dao = CRM_Core_DAO::executeQuery($sql, $params);
+
+  // @todo it would be nice to record how many records were deleted in the job
+  // log but I haven't figured out how to do this.
+  return civicrm_api3_create_success();
 }
 
