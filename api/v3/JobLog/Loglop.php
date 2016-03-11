@@ -41,12 +41,12 @@ function civicrm_api3_job_log_Loglop($params) {
   // one year ago @todo allow changing this.
   $ages_ago = date('Y-m-d', strtotime("today - $loglop_job_log_age"));
 
-  $result = (int) civicrm_api3('JobLog', 'getcount', array(
+  $entries_to_delete = (int) civicrm_api3('JobLog', 'getcount', array(
     'run_time' => array('<' => $ages_ago),
   ));
-  if ($result == 0) {
+  if ($entries_to_delete == 0) {
     // Nothing to do.
-    return civicrm_api3_create_success();
+    return civicrm_api3_create_success('Nothing to do.');
   }
   // We need to do a bulk delete. CiviCRM's API does not let us do this. Too
   // dangerous. Quite sensible. Let's go for it!
@@ -58,6 +58,6 @@ function civicrm_api3_job_log_Loglop($params) {
 
   // @todo it would be nice to record how many records were deleted in the job
   // log but I haven't figured out how to do this.
-  return civicrm_api3_create_success();
+  return civicrm_api3_create_success("Deleted $entries_to_delete log entries that were older than $loglop_job_log_age");
 }
 
