@@ -21,8 +21,6 @@ function _civicrm_api3_job_log_Loglop_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_job_log_Loglop($params) {
-  //if (array_key_exists('magicword', $params) && $params['magicword'] == 'sesame') {
-  // civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL, &$dao = NULL, $extraReturnValues = array()) {
 
   // Load setting.
   $result = civicrm_api3('Setting', 'get', array(
@@ -33,7 +31,7 @@ function civicrm_api3_job_log_Loglop($params) {
   // Check it's something valid, otherwise the strtotime might mess up and give
   // today's date which would delete all logs :-/
   if (!in_array($loglop_job_log_age, ['', '2 years', '1 year', '6 months', '1 month', '1 day'])) {
-    $loglop_job_log_age = '';
+    throw new API_Exception("The cut-off date for loglop is not one of the allowed options. Please reconfigure at /civicrm/admin/loglop");
   }
   if (!$loglop_job_log_age) {
     // disabled.
