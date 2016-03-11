@@ -13,4 +13,4 @@ was making backups slow and generally being a waste of resources.
 
 Install and enable the extension in the normal way. Then navigate to
 `/civicrm/admin/loglop` which is where you say at what age you want to lop your
-logs. **It defaults to never**.
+logs. **It defaults to 2 years**.

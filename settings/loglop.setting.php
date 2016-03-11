@@ -6,7 +6,7 @@ return array (
     'name' => 'loglop_job_log_age',
     'type' => 'String',
     'html_type' => 'select',
-    'default' => '',
+    'default' => '2 years',
     'add' => '4.6',
     'title' => 'Delete job logs older than',
     'is_domain' => '1',

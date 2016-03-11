@@ -2,7 +2,7 @@
 <extension key="uk.artfulrobot.loglop" type="module">
   <file>loglop</file>
   <name>Log Lop</name>
-  <description>Provides scheduled task to prevent job logs growing indefinitely by lopping off logs older than a configured length of time, e.g. 1 month, 1 year. After installing go to /civicrm/admin/loglop to enable.</description>
+  <description>Provides scheduled task to prevent job logs growing indefinitely by lopping off logs older than a configured length of time, e.g. 1 month, 1 year. After installing go to /civicrm/admin/loglop to set the date cut-off - default is 2 years.</description>
   <license>GPL-2.0+</license>
   <maintainer>
     <author>Rich Lott</author>
