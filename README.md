@@ -1,5 +1,16 @@
 # Log Lop CiviCRM extension
 
+## DEPRECATED! You (probably) don't need this!
+
+Turns out that there's already a clean up job built into CiviCRM core which can delete job log records.
+
+It has some weird logic but intends to (a) keep all logs for 30 days, and (b) deletes older logs (randomly) if they're older than 30 days.
+
+You just need to enable the Scheduled Job called "cleanup".
+
+
+## Original text:
+
 Whenever CiviCRM runs scheduled jobs it creates entries in a logging table.
 These are not very interesting and over time they build up enormously.
 
